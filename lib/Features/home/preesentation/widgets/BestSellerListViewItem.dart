@@ -1,4 +1,5 @@
 
+import 'package:booklyapp/Features/home/preesentation/widgets/BookRateing.dart';
 import 'package:booklyapp/core/utlis/app_router.dart';
 import 'package:booklyapp/core/utlis/assets.dart';
 import 'package:flutter/material.dart';
@@ -69,6 +70,7 @@ class BestSellerListViewItem extends StatelessWidget {
                   
                   // السعر
                    Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween, // لتوزيع السعر والتقييم على طرفي الـ Row
                      children: [
                        Text(
                         "19.99 €",
@@ -77,6 +79,7 @@ class BestSellerListViewItem extends StatelessWidget {
                           fontWeight: FontWeight.bold, // خط عريض للسعر
                         ),
                                        ),
+                                       BookRating(), // إضافة تقييم الكتاب بجانب السعر
                                        
                      ],
                    ),

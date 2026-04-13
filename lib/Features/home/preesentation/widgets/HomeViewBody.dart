@@ -1,8 +1,8 @@
 import 'package:booklyapp/Features/home/preesentation/widgets/BestSellerListView.dart';
 import 'package:booklyapp/Features/home/preesentation/widgets/BestSellerListViewItem.dart';
-import 'package:booklyapp/Features/home/preesentation/widgets/customBookImage.dart';
+import 'package:booklyapp/Features/home/preesentation/widgets/custom%20_listview.dart';
 import 'package:booklyapp/Features/home/preesentation/widgets/customApp_bar.dart';
-import 'package:booklyapp/Features/home/preesentation/widgets/custoumlistview_item.dart';
+import 'package:booklyapp/Features/home/preesentation/widgets/BookListViewItem.dart';
 import 'package:booklyapp/core/utlis/assets.dart';
 import 'package:booklyapp/core/utlis/styles.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class Homeviewbody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               customApp_bar(),
-              customBookImage(),
+              custoumListView(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 13),
                 child: Text("Best Seller", style: TextStyles.sectionHeader),
