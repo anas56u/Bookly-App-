@@ -17,7 +17,7 @@ class TextStyles {
   static const TextStyle sectionHeader = TextStyle(
     fontFamily: primaryFont,
     fontSize: 19,
-    fontWeight: FontWeight.w600, 
+    fontWeight: FontWeight.w600,
     color: primaryText,
   );
   static const TextStyle listBookTitle = TextStyle(

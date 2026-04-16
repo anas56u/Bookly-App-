@@ -13,8 +13,11 @@ abstract class AppRouter {
     routes: [
       GoRoute(path: splashView, builder: (context, state) => SplashView()),
       GoRoute(path: homeView, builder: (context, state) => Homeview()),
-      GoRoute(path:bookDetailsView, builder: (context, state) => BookDetailsview()),
-      GoRoute(path:   searchView, builder: (context, state) => Searchview()),
+      GoRoute(
+        path: bookDetailsView,
+        builder: (context, state) => BookDetailsview(),
+      ),
+      GoRoute(path: searchView, builder: (context, state) => Searchview()),
     ],
   );
 }

@@ -2,9 +2,7 @@ import 'package:booklyapp/core/widgets/button.dart';
 import 'package:flutter/material.dart';
 
 class BooksAction extends StatelessWidget {
-  const BooksAction({
-    super.key,
-  });
+  const BooksAction({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +18,10 @@ class BooksAction extends StatelessWidget {
             textcolor: Colors.black,
             text: '19.99€',
           ),
-        ),Expanded(
+        ),
+        Expanded(
           child: Button(
-             borderradues: BorderRadius.only(
+            borderradues: BorderRadius.only(
               topRight: Radius.circular(16),
               bottomRight: Radius.circular(16),
             ),

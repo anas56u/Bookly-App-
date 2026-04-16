@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomBookDeatelsAppBar extends StatelessWidget {
-  const CustomBookDeatelsAppBar({
-    super.key,
-  });
+  const CustomBookDeatelsAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {

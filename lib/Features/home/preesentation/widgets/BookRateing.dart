@@ -7,7 +7,7 @@ class BookRating extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       // لجعل العناصر تأخذ مساحتها الطبيعية فقط دون التمدد
-      mainAxisSize: MainAxisSize.min, 
+      mainAxisSize: MainAxisSize.min,
       children: [
         // أيقونة النجمة
         const Icon(
@@ -16,17 +16,14 @@ class BookRating extends StatelessWidget {
           size: 20, // التحكم بحجم الأيقونة لتناسب النص
         ),
         const SizedBox(width: 6.3),
-        
+
         // التقييم (الرقم)
         const Text(
           "4.8",
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         const SizedBox(width: 5),
-        
+
         // عدد المقيمين
         Text(
           "(2390)",
