@@ -1,14 +1,17 @@
+import 'package:booklyapp/Features/home/data/models/BookModel.dart';
+import 'package:booklyapp/Features/home/preesentation/widgets/BookListViewItem.dart';
 import 'package:booklyapp/Features/home/preesentation/widgets/BookRateing.dart';
 import 'package:booklyapp/Features/home/preesentation/widgets/BooksAction.dart';
 import 'package:booklyapp/Features/home/preesentation/widgets/CustomBookDeatelsAppBar.dart';
-import 'package:booklyapp/Features/home/preesentation/widgets/BookListViewItem.dart';
 import 'package:booklyapp/Features/home/preesentation/widgets/similarBooksListView.dart';
-import 'package:booklyapp/core/utlis/styles.dart';
-import 'package:booklyapp/core/widgets/button.dart';
 import 'package:flutter/material.dart';
+// ... (باقي الاستيرادات الخاصة بك)
 
 class Bookdetailesbody extends StatelessWidget {
-  const Bookdetailesbody({super.key});
+  // 1. أضفنا الكتاب كمتغير مطلوب
+  const Bookdetailesbody({super.key, required this.book});
+
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -18,34 +21,42 @@ class Bookdetailesbody extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            CustomBookDeatelsAppBar(),
+            const CustomBookDeatelsAppBar(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: width * .19),
-              child: BookListViewItem(),
+              // 2. نمرر الكتاب ليعرض غلافه الحقيقي
+              child: BookListViewItem(book: book),
             ),
+            const SizedBox(height: 40),
             Text(
-              "just a book name",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+              book.title, // 3. عنوان الكتاب الحقيقي
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
             ),
-            SizedBox(height: 7),
+            const SizedBox(height: 7),
             Text(
-              "just a book author",
-              style: TextStyle(fontSize: 18, color: Colors.grey),
+              book.authorName ?? 'مؤلف غير معروف', // 4. المؤلف الحقيقي
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.grey,
+                fontStyle: FontStyle.italic,
+              ),
             ),
-            SizedBox(height: 20),
-            BookRating(),
-            SizedBox(height: 20),
-            BooksAction(),
-            SizedBox(height: 40),
-            Align(
+            const SizedBox(height: 20),
+            const BookRating(), // يمكنك تمرير تقييم الكتاب هنا لاحقاً
+            const SizedBox(height: 20),
+// استبدل السطر القديم: BooksAction(), 
+// بهذا السطر:
+BooksAction(book: book),            const SizedBox(height: 40),
+            const Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "you can also like ",
+                "You can also like",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
             ),
-            SizedBox(height: 23),
-            similarBooksListView(),
+            const SizedBox(height: 23),
+            const similarBooksListView(),
           ],
         ),
       ),

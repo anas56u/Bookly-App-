@@ -1,84 +1,85 @@
-import 'package:booklyapp/Features/home/preesentation/widgets/BookRateing.dart';
-import 'package:booklyapp/core/utlis/app_router.dart';
-import 'package:booklyapp/core/utlis/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:booklyapp/core/utlis/app_router.dart';
+import 'package:booklyapp/Features/home/data/models/BookModel.dart';
+import 'package:booklyapp/Features/home/preesentation/widgets/BookRateing.dart';
 
 class BestSellerListViewItem extends StatelessWidget {
-  const BestSellerListViewItem({super.key});
+  // 1. طلب تمرير كائن الكتاب في الـ Constructor
+  const BestSellerListViewItem({super.key, required this.book});
+
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(AppRouter.bookDetailsView);
-      },
+        // لاحقاً سنمرر الـ book لهذه الشاشة أيضاً لتعرض تفاصيله
+GoRouter.of(context).push(AppRouter.bookDetailsView, extra: book);      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 13),
         child: Row(
-          // هذه الخاصية تجعل الصورة والنصوص تبدأ من أعلى الـ Row وليس من منتصفه
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 1. الجزء الأول: الصورة
+            // 2. استخدام CachedNetworkImage مع ClipRRect لغلاف الكتاب
             SizedBox(
-              height: 158,
+              height: 125, // ارتفاع مناسب للقائمة العمودية
               child: AspectRatio(
-                aspectRatio: 1.5 / 2.5,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: const DecorationImage(
-                      image: AssetImage(Assets.test_image),
-                      fit: BoxFit.cover, // مهم جداً لملء الحواف الدائرية
+                aspectRatio: 2.5 / 4,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: CachedNetworkImage(
+                    imageUrl: book.coverUrl ?? 'https://via.placeholder.com/150',
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(),
                     ),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
                   ),
                 ),
               ),
             ),
-
             const SizedBox(width: 20),
+            
+            // 3. عرض تفاصيل الكتاب
             Expanded(
               child: Column(
-                // هذه الخاصية تجبر جميع النصوص على البدء من اليسار
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // العنوان
-                  const Text(
-                    "Harry Potter and the Goblet of Fire",
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 20, // تكبير الخط ليطابق التصميم
-                      fontWeight: FontWeight.normal,
-                      fontFamily:
-                          'GT Sectra Fine', // إذا كان لديك الخط المخصص للتطبيق
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: Text(
+                      book.title, // العنوان الحقيقي من الـ API
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'GT Sectra Fine',
+                      ),
                     ),
                   ),
-
-                  const SizedBox(height: 10), // مسافة للتنفس
-                  // اسم المؤلف
-                  const Text(
-                    "J.K. Rowling",
-                    style: TextStyle(
+                  const SizedBox(height: 3),
+                  Text(
+                    book.authorName ?? 'مؤلف غير معروف', // اسم المؤلف
+                    style: const TextStyle(
                       fontSize: 14,
-                      color: Colors.grey, // لون رمادي ليطابق التصميم
+                      color: Colors.grey,
                     ),
                   ),
-
-                  const SizedBox(height: 10), // مسافة للتنفس
-                  // السعر
+                  const SizedBox(height: 3),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceBetween, // لتوزيع السعر والتقييم على طرفي الـ Row
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "19.99 €",
+                      const Text(
+                        "Free", // غيرناها من 19.99 لأن Open Library يقدم كتباً مجانية
                         style: TextStyle(
                           fontSize: 20,
-                          fontWeight: FontWeight.bold, // خط عريض للسعر
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      BookRating(), // إضافة تقييم الكتاب بجانب السعر
+                      // عنصر التقييم (يمكنك لاحقاً تمرير book.rating له إذا أحببت)
+                      const BookRating(), 
                     ],
                   ),
                 ],

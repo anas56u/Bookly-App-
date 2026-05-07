@@ -7,11 +7,13 @@ class Button extends StatelessWidget {
     required this.textcolor,
     required this.backgroundcolor,
     this.borderradues,
+    this.onPressed,
   });
   final String text;
   final Color textcolor;
   final Color backgroundcolor;
   final BorderRadius? borderradues;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class Button extends StatelessWidget {
           borderRadius: borderradues ?? BorderRadius.circular(16),
         ),
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: Text(
         text,
         style: TextStyle(
